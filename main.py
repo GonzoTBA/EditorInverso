@@ -152,10 +152,9 @@ class ReverseEditorApp:
         current_line = self.text.get("1.0", "2.0")
         paragraph = current_line.rstrip("\n")
 
-        if paragraph.strip():
-            # La nueva linea confirmada se coloca al principio del historial
-            # para empujar hacia abajo las anteriores.
-            self.committed_paragraphs.insert(0, paragraph)
+        # Tambien guardamos lineas vacias para permitir dobles o triples
+        # saltos verticales cuando el usuario pulsa Enter varias veces.
+        self.committed_paragraphs.insert(0, paragraph)
 
         self.render_document(draft="")
         return "break"
